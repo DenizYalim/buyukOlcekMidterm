@@ -1,9 +1,9 @@
 package com.example.demo;
 
-import java.util.Date;
+// import java.util.Date;
 
 class CheckinRequest{
-    int flightNumber;
-    Date date;
-    String passengerName;
+    public int flightNumber;
+    public String date;
+    public String passengerName;
 }

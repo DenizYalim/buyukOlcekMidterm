@@ -1,5 +1,6 @@
 package com.example.demo;
 
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -8,8 +9,6 @@ import java.util.Map;
 
 // @Entity
 class Flight{
-    // todo: add an unique id
-    // @Id @GeneratedValue
 
     public int flightNumber;
     public Date fromDate;
@@ -17,12 +16,14 @@ class Flight{
     public String fromAirport;
     public String toAirport;
     public double duration;
-    public int capacity; // Capacity of people ?
+    public int capacity;
     public boolean oneWayTrip;
-    public ArrayList<String> passengers;
-    public Map<Integer, String> seats;
-    public boolean checkIn;
+    private ArrayList<String> passengers;
+    private Map<Integer, String> seats;
 
+    public ArrayList<String> getPassengers(){
+        return passengers;
+    }
 
     public Flight(int flightNumber){
         this.flightNumber = flightNumber;
@@ -30,7 +31,6 @@ class Flight{
         seats = new HashMap<>();
 
         capacity = 100; // default
-        checkIn = false;
     }
 
     public boolean addPassenger(String name){
