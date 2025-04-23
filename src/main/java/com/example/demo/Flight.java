@@ -43,9 +43,9 @@ class Flight{
 
     public boolean checkInPassenger(String name){
         if(!passengers.contains(name)){
-            return false;
+            return true;
         }
-        
+
         seats.put(seats.size(), name);
         return true;
     }

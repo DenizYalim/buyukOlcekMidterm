@@ -2,6 +2,8 @@ package com.example.demo;
 
 import java.util.ArrayList;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -60,6 +62,8 @@ class FlightController{
         int flightNum = ticketRequest.flightNumber;
         // date is unnecesarry
         String name = ticketRequest.passengerName;
+        
+    System.out.println("Request received: " + ticketRequest);
 
         Flight flight = repo.getFlight(flightNum);
         if(flight != null){
@@ -78,8 +82,25 @@ class FlightController{
     
     // PUT PASSENGERS INTO SEATS
     @PutMapping("/check-in")
-    public boolean checkInPassengers(@RequestBody CheckinRequest request){
-        System.out.println("testss" + request.flightNumber);
-        return repo.getFlight(request.flightNumber).checkInPassenger(request.passengerName);
+    public ResponseEntity<Object> checkInPassengers(@RequestBody CheckinRequest request) {
+        
+    System.out.println("Request received: " + request);
+
+        Flight flight = repo.getFlight(request.flightNumber);
+        
+        if (flight == null) {
+            // Return 404 Not Found if the flight doesn't exist
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                                .body("Flight with number " + request.flightNumber + " not found. " + request.passengerName);
+        }
+        
+        boolean success = flight.checkInPassenger(request.passengerName);
+        
+        if (success) {
+            return ResponseEntity.ok("Passenger " + request.passengerName + " successfully checked-in.");
+        } else {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                                .body("Check-in failed for flight number: " + request.flightNumber);
+        }
     }
 }
