@@ -1,0 +1,8 @@
+Issues
+
+Database choice
+I had never worked with PostgreSQL before my experience was limited to MySQL so picking up a brand new tool during the project wasn’t the smartest move maybe. But I keep seeing PostgreSQL during my job hunting, and I wanted to use this as an oppurtunity to start learning it.
+
+
+JWT implementation
+As for using Spring Boot instead of .NET, it came with some trade-offs. The biggest one was not being able to finish the authentication feature. I struggled a lot with implementing JWT because I had to dive deep into encryption concepts. My research basically said the required classes were mostly boilerplate. But I didn’t want to just copy and paste code without truly understanding what it does. I might add JWT support after the deadline, but for now, it’s not included.
