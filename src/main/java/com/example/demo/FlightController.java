@@ -67,8 +67,6 @@ class FlightController{
     }
 
 
-
-
     @PutMapping("/buy-ticket")
     public boolean buyTicket(@RequestBody TicketRequest ticketRequest){
         System.out.println("Request received: " + ticketRequest + "  " + ticketRequest.flightNumber + " name: "+ ticketRequest.passengerName); // debug
