@@ -2,8 +2,8 @@ from flask import Flask, request, jsonify
 
 app = Flask(__name__)
 
-PYTHON_LINK = "https://localhost:8000"
-SPRING_LINK = "dunno"
+PYTHON_LINK = "https://localhost:8000" # I wonder what will happen if backend tries to take an already occupied port
+SPRING_LINK = "https://localhost:8080"
 
 def proxy_request():
     method = request.method

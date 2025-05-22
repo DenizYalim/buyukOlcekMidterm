@@ -1,0 +1,27 @@
+version: "3.8"
+
+services:  
+  gateway:
+    build: ./flaskGateway
+    ports:
+      - "5000:5000"
+    depends_on:
+      - python
+      - spring
+
+  spring:
+    build: ./spring-backend
+    ports:
+      - "8080:8080"
+
+  python:
+    build: ./flaskLLM
+    ports:
+      - "8000:8000"
+    
+  react:
+    build: ./chatgui
+    ports:
+      - "3000:3000"
+    depends_on:
+      - gateway
