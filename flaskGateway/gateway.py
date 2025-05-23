@@ -1,7 +1,9 @@
 from flask import Flask, request, Response, jsonify
+from flask_cors import CORS
 import requests
 
 app = Flask(__name__)
+CORS(app)
 
 LLM_LINK = "http://localhost:8000" # I wonder what will happen if backend tries to take an already occupied port
 SPRING_LINK = "http://localhost:8080"

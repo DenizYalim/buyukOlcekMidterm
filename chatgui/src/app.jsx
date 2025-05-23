@@ -28,6 +28,10 @@ function App() {
           setError(err.message);
         });
     })
+
+    if (!error){
+    setMessageHistory([...messageHistory, ['AI', llmResponse]]);
+    }
   }
 
 function PingGateway() {
@@ -45,6 +49,7 @@ function PingGateway() {
       })
       .catch((error) => {
         console.error('Fetch error:', error);
+        console.log(error);
         setError('Failed to fetch message');
       });
   }, []);
