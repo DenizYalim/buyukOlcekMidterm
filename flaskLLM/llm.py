@@ -9,7 +9,7 @@ client = openai.OpenAI()
 
 def getResponse(prompt,  context = None):
     if context is None:
-        context =" You are a financial analyst."
+        context = "If the user asks to make a new flight, call endpoint /addFlight"
     response = client.chat.completions.create(
         model="gpt-4",
         messages=[
@@ -23,5 +23,5 @@ def getResponse(prompt,  context = None):
 # print(getResponse("Hello gpt how are you doing? what is 1 + 1"))
 
 
-if __name__ != "__main__": # this works lmaooooooo
+if __name__ != "__main__": 
     pass

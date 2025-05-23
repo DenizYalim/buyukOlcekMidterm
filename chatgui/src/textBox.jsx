@@ -6,7 +6,7 @@ function TextBox({ sendMessage }) {
   const submitMessage = (e) => {
     e.preventDefault();
     if (message.trim() === '') return;
-    sendMessage( ['Client', message]);
+    sendMessage( ['Client', message.trim()]);
     setMessage('');
   };
 

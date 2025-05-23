@@ -1,11 +1,12 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, Response, jsonify
+import requests
 
 app = Flask(__name__)
 
-PYTHON_LINK = "https://localhost:8000" # I wonder what will happen if backend tries to take an already occupied port
-SPRING_LINK = "https://localhost:8080"
+LLM_LINK = "http://localhost:8000" # I wonder what will happen if backend tries to take an already occupied port
+SPRING_LINK = "http://localhost:8080"
 
-def proxy_request():
+def proxy_request(target_url):
     method = request.method
     headers = {key: value for key, value in request.headers if key != 'Host'}
     data = request.get_data()
@@ -17,10 +18,14 @@ def proxy_request():
 
     return Response(resp.content, resp.status_code, headers)
 
+@app.route("/ping_gateway", methods = ["GET", "POST", "PATCH", "DELETE"])
+def ping_gateway():
+    message =  "pinged python api gateway"
+    return Response(message, 200, mimetype='text/plain')
 
-@app.route("/python/<path:path>", methods = ["GET", "POST", "PATCH", "DELETE"])
-def python_proxy(path):
-    actual_path = f"{PYTHON_LINK}/{path}"
+@app.route("/llm/<path:path>", methods = ["GET", "POST", "PATCH", "DELETE"])
+def llm_proxy(path):
+    actual_path = f"{LLM_LINK}/{path}"
     return proxy_request(actual_path)
 
 @app.route("/spring/<path:path>", methods = ["GET", "POST", "PATCH", "DELETE"])
